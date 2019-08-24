@@ -1,0 +1,24 @@
+{
+  "name": "NodeHangman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Ryan-Mobley/NodeHangman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/The-Ryan-Mobley/NodeHangman/issues"
+  },
+  "homepage": "https://github.com/The-Ryan-Mobley/NodeHangman#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^7.0.0"
+  }
+}
