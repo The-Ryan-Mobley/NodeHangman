@@ -14,7 +14,9 @@ class word{
         return str;
     }
     guess(letter){
-        if()
+        if(this.fullWord.indexOf(letter) !== -1){
+            
+        }
     }
 }
 function writeWords(){
