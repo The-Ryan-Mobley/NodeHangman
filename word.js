@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 class word{
     constructor(n){
         this.fullWord = n;
+        this.wordarr = [];
         this.hiddenWord = this.Underscores();
     }
     Underscores(){
@@ -15,7 +16,7 @@ class word{
     }
     guess(letter){
         if(this.fullWord.indexOf(letter) !== -1){
-            
+
         }
     }
 }

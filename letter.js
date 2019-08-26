@@ -1,3 +1,5 @@
+const fs = require('fs');
+const inquirer = require('inquirer');
 class letter{ //make each letter of a string an obj
     constructor(l){
         this.letter = l;
