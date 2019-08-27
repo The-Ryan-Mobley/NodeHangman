@@ -7,14 +7,16 @@ module.exports = class word_obj{
     constructor(n){
         this.fullWord = n;
         this.wordarr = [];
-        this.hiddenWord = this.Underscores();
+        this.hiddenWord = [];
+        this.Underscores();
+    }
+    testvalues(){
+        console.log('obj generated with word: '+this.fullWord);
     }
     Underscores(){
-        let str = [];
         for(let i = 0; i < this.fullWord.length; i++){
-            str.push('_');
+            this.hiddenWord.push('_');
         }
-        return str;
     }
     guess(letter){
         if(this.fullWord.indexOf(letter) !== -1){
