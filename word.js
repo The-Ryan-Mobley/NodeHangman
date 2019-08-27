@@ -42,7 +42,6 @@ module.exports = class word_obj{
                 });
                 console.log('lets go');
                 count++;
-                this.display();
                 if(count < this.fullWord.length){
                     this.gameLoop(count);
                 }

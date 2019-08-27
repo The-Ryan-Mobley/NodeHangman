@@ -22,6 +22,37 @@ word.prototype.populateList = function(counter){ //works by creating a new lette
     }
 
 }
+word.prototype.gameLoop = function(count){
+    this.display();
+    if(this.completed === false){
+        inquirer.prompt([
+            {
+                name:'choice',
+                type:'input',
+                message:'Enter a letter'
+            }
+        ]).then((ch)=>{
+            this.checkInput(ch.choice.toString(),count);
+        })
+    }
+    else{
+        inquirer.prompt([
+            {
+                name:'end',
+                type:'confirm',
+                message:'Word Complete! Play again?'
+            }
+        ]).then((ch)=>{
+            if(ch.end===true){
+                readWords();
+            }
+            else{
+                startMenu();
+            }
+        });
+
+    }
+}
 
 function writeWords(){ //writes the initial file
     let arr = ["punch out","skyrim","team fortress","mario","doom"];
