@@ -68,23 +68,6 @@ function startMenu(){
 
     });
 }
-// function gameLoop(w_obj,count){
-//     if(count < w_obj.fullWord.length){
-//         inquirer.prompt([
-//             {
-//                 name:'choice',
-//                 type:'input',
-//                 message:'Enter a letter'
-//             }
-//         ]).then((ch)=>{
-//             w_obj.checkInput(ch.choice.toString());
-//             count++;
-//             gameLoop(w_obj,count);
-    
-    
-//         })
-//     }
-// }
 
 function main(){
     startMenu();

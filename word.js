@@ -10,6 +10,7 @@ module.exports = class word_obj{
         this.hiddenWord = [];
         this.usedLetters = [];
         this.tries = 5;
+        this.completed = false;
         this.Underscores();
         
     }
@@ -40,9 +41,16 @@ module.exports = class word_obj{
 
                 });
                 console.log('lets go');
-                this.count++;
+                count++;
                 this.display();
-                this.gameLoop(count);
+                if(count < this.fullWord.length){
+                    this.gameLoop(count);
+                }
+                else{
+                    this.completed = true;
+                    this.gameLoop(count);
+
+                }
 
             }
             else{
@@ -51,10 +59,14 @@ module.exports = class word_obj{
                 this.gameLoop(count);
             }
         }
+        else{
+            console.log('REPEAT INPUT');
+            this.gameLoop(count);
+        }
     }
     gameLoop(count){
         this.display();
-        if(count < this.fullWord.length){
+        if(this.completed === false){
             inquirer.prompt([
                 {
                     name:'choice',
@@ -64,6 +76,20 @@ module.exports = class word_obj{
             ]).then((ch)=>{
                 this.checkInput(ch.choice.toString(),count);
             })
+        }
+        else{
+            inquirer.prompt([
+                {
+                    name:'end',
+                    type:'confirm',
+                    message:'Word Complete! Play again?'
+                }
+            ]).then((ch)=>{
+                if(ch.end===true){
+                    startmenu();
+                }
+            });
+
         }
     }
 }
