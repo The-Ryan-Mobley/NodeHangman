@@ -43,6 +43,7 @@ function readWords(){
         let level = new word(rand);
         level.populateList(letterCount);
         level.display();
+        level.gameLoop(letterCount);
         
         
     });
@@ -57,6 +58,7 @@ function startMenu(){
     ]).then((re)=>{
         switch(re.menu){
             case 'Start':{
+                readWords();
 
             }
             case 'Quit':{
@@ -66,9 +68,26 @@ function startMenu(){
 
     });
 }
+// function gameLoop(w_obj,count){
+//     if(count < w_obj.fullWord.length){
+//         inquirer.prompt([
+//             {
+//                 name:'choice',
+//                 type:'input',
+//                 message:'Enter a letter'
+//             }
+//         ]).then((ch)=>{
+//             w_obj.checkInput(ch.choice.toString());
+//             count++;
+//             gameLoop(w_obj,count);
+    
+    
+//         })
+//     }
+// }
 
 function main(){
-    readWords();
+    startMenu();
     
 
 }
