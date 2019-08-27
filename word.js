@@ -9,7 +9,7 @@ module.exports = class word_obj{
         this.wordarr = [];
         this.hiddenWord = [];
         this.usedLetters = [];
-        this.tries = 5;
+        this.tries = 8;
         this.completed = false;
         this.Underscores();
         
@@ -63,32 +63,5 @@ module.exports = class word_obj{
             this.gameLoop(count);
         }
     }
-    gameLoop(count){
-        this.display();
-        if(this.completed === false){
-            inquirer.prompt([
-                {
-                    name:'choice',
-                    type:'input',
-                    message:'Enter a letter'
-                }
-            ]).then((ch)=>{
-                this.checkInput(ch.choice.toString(),count);
-            })
-        }
-        else{
-            inquirer.prompt([
-                {
-                    name:'end',
-                    type:'confirm',
-                    message:'Word Complete! Play again?'
-                }
-            ]).then((ch)=>{
-                if(ch.end===true){
-                    startmenu();
-                }
-            });
-
-        }
-    }
+    
 }

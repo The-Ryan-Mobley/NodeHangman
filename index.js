@@ -24,36 +24,48 @@ word.prototype.populateList = function(counter){ //works by creating a new lette
 }
 word.prototype.gameLoop = function(count){
     this.display();
-    if(this.completed === false){
-        inquirer.prompt([
-            {
-                name:'choice',
-                type:'input',
-                message:'Enter a letter'
-            }
-        ]).then((ch)=>{
-            this.checkInput(ch.choice.toString(),count);
-        })
+    if(this.tries > 0){
+        if(this.completed === false){
+            inquirer.prompt([
+                {
+                    name:'choice',
+                    type:'input',
+                    message:'Enter a letter'
+                }
+            ]).then((ch)=>{
+                this.checkInput(ch.choice.toString(),count);
+            })
+        }
+        else{
+            inquirer.prompt([
+                {
+                    name:'end',
+                    type:'confirm',
+                    message:'Word Complete! Play again?'
+                }
+            ]).then((ch)=>{
+                if(ch.end===true){
+                    readWords();
+                }
+            });
+
+        }
     }
     else{
         inquirer.prompt([
             {
                 name:'end',
                 type:'confirm',
-                message:'Word Complete! Play again?'
+                message:'GAME OVER! Play again?'
             }
         ]).then((ch)=>{
             if(ch.end===true){
-                readWords();
-            }
-            else{
                 startMenu();
             }
         });
-
+        
     }
 }
-
 function writeWords(){ //writes the initial file
     let arr = ["punch out","skyrim","team fortress","mario","doom"];
     fs.writeFile('list.txt',arr,(err)=>{
@@ -61,6 +73,9 @@ function writeWords(){ //writes the initial file
             console.log("FAILED TO WRITE/n"+err);
         }
     });
+}
+function addWords(word){
+
 }
 function readWords(){
     fs.readFile('list.txt','utf-8',(err,data)=>{
