@@ -42,8 +42,28 @@ function readWords(){
         let letterCount = 0;
         let level = new word(rand);
         level.populateList(letterCount);
+        level.display();
         
         
+    });
+}
+function startMenu(){
+    inquirer.prompt([
+        {
+            name:'menu',
+            type:'list',
+            choices: ['Start','Options','Quit']
+        }
+    ]).then((re)=>{
+        switch(re.menu){
+            case 'Start':{
+
+            }
+            case 'Quit':{
+                
+            }
+        }
+
     });
 }
 
