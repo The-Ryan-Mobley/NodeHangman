@@ -74,7 +74,56 @@ function writeWords(){ //writes the initial file
         }
     });
 }
+function promptOptions(){
+    inquirer.prompt([
+        {
+            name:'option',
+            type:'list',
+            choices: ['Add word','Remove word','back']
+
+        }
+    ]).then((op)=>{
+        switch(op.option){
+            case 'Add word':{
+                addPrompt();
+                break;
+
+            }
+            case 'Remove word':{
+                break;
+
+            }
+            case 'back':{
+                startMenu();
+                break;
+
+            }
+        }
+
+    });
+}
+function addPrompt(){
+    inquirer.prompt([
+        {
+            name:'addition',
+            type:'input',
+            message:'Type the word you want to add: '
+
+        }
+    ]).then((op)=>{
+        addWords(op.addition);
+
+    });
+}
 function addWords(word){
+    fs.appendFileSync('list.txt',word.toString()+',',(err)=>{
+        if(err){
+            console.log("FAILED TO WRITE/n"+err);
+        }
+
+    });
+    console.log('succesfully added word '+word);
+    promptOptions();
 
 }
 function readWords(){
@@ -90,10 +139,9 @@ function readWords(){
         level.populateList(letterCount);
         level.display();
         level.gameLoop(letterCount);
-        
-        
     });
 }
+
 function startMenu(){
     inquirer.prompt([
         {
@@ -105,13 +153,17 @@ function startMenu(){
         switch(re.menu){
             case 'Start':{
                 readWords();
-
+                break;
+            }
+            case 'Options':{
+                promptOptions();
+                break;
             }
             case 'Quit':{
-                
+                console.log('goodbye!');
+                break;
             }
         }
-
     });
 }
 
