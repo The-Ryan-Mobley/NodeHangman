@@ -1,7 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-class word{
+
+
+module.exports = class word_obj{
     constructor(n){
         this.fullWord = n;
         this.wordarr = [];
@@ -20,25 +22,3 @@ class word{
         }
     }
 }
-function writeWords(){
-    let arr = ["punch out","skyrim","team fortress","mario","doom"];
-    fs.writeFile('list.txt',arr,(err)=>{
-        if(err){
-            console.log("FAILED TO WRITE/n"+err);
-        }
-    });
-}
-function readWords(){
-    fs.readFile('list.txt','utf-8',(err,data)=>{
-        if(err){
-            console.log('what have you done?/n'+err);
-        }
-        let readArr = data.split(',');
-        return readArr;
-    });
-}
-function main(){
-    let triviaList = readWords();
-
-}
-main();
