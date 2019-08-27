@@ -4,6 +4,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const word = require('./word.js');
 const letter = require('./letter.js');
+var usedArr = [];
 
 word.prototype.populateList = function(counter){ //works by creating a new letter object and pushes it into an array
     if(counter < this.fullWord.length){
@@ -96,10 +97,8 @@ function promptOptions(){
             case 'back':{
                 startMenu();
                 break;
-
             }
         }
-
     });
 }
 function addPrompt(){
@@ -112,7 +111,6 @@ function addPrompt(){
         }
     ]).then((op)=>{
         addWords(op.addition);
-
     });
 }
 function addWords(word){
@@ -132,7 +130,8 @@ function readWords(){
             console.log('what have you done?/n'+err);
         }
         let readArr = data.split(',');
-        let rand = readArr[Math.floor(Math.random()*readArr.length)]
+        let rand = readArr[Math.floor(Math.random()*readArr.length)];
+        
         console.log('RNG SAYS '+rand);
         let letterCount = 0;
         let level = new word(rand);
@@ -141,6 +140,10 @@ function readWords(){
         level.gameLoop(letterCount);
     });
 }
+function checkUsed(val){
+
+}
+
 
 function startMenu(){
     inquirer.prompt([
@@ -169,8 +172,6 @@ function startMenu(){
 
 function main(){
     startMenu();
-    
-
 }
 main();
 
