@@ -23,11 +23,12 @@ module.exports = class word_obj{
         }
     }
     display(){
-        console.log(' ');
+        console.log('tries left: '+this.tries);
+        console.log(' \n');
         this.wordarr.forEach((element)=>{
             element.cLog();
         })
-        console.log(' ');
+        console.log(' \n\n');
     }
     checkInput(letter,count){
         if(this.usedLetters.indexOf(letter) === -1){
@@ -36,11 +37,9 @@ module.exports = class word_obj{
                 this.wordarr.forEach((element)=>{
                     if(element.character === letter){
                         element.guess(letter);
-                        console.log('found match');
                     }
 
                 });
-                console.log('lets go');
                 count++;
                 if(count < this.fullWord.length){
                     this.gameLoop(count);
@@ -48,6 +47,7 @@ module.exports = class word_obj{
                 else{
                     this.completed = true;
                     this.gameLoop(count);
+                    this.display();
 
                 }
 
