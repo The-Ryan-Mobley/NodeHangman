@@ -141,6 +141,9 @@ function readWords(){
     });
 }
 function checkUsed(val){
+    if(usedArr.indexOf(val) === -1){
+        
+    }
 
 }
 
