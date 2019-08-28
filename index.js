@@ -130,19 +130,27 @@ function readWords(){
             console.log('what have you done?/n'+err);
         }
         let readArr = data.split(',');
-        let rand = readArr[Math.floor(Math.random()*readArr.length)];
+        let genWord = checkUsed(readArr);
         
-        console.log('RNG SAYS '+rand);
+        console.log('RNG SAYS '+genWord);
         let letterCount = 0;
-        let level = new word(rand);
+        let level = new word(genWord);
         level.populateList(letterCount);
         level.display();
         level.gameLoop(letterCount);
     });
 }
-function checkUsed(val){
-    if(usedArr.indexOf(val) === -1){
-        
+function checkUsed(arr){
+    let rand = arr[Math.floor(Math.random()*arr.length)];
+    if(usedArr.indexOf(rand) === -1){
+        usedArr.push(rand);
+        return rand;
+    }
+    else{
+        if(usedArr.length === arr.length){
+            usedArr = [];
+        }
+        checkUsed(arr);
     }
 
 }
