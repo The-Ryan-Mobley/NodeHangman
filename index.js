@@ -133,7 +133,7 @@ function addPrompt(){
     });
 }
 function addWords(word){
-    fs.appendFileSync('list.txt',word.toString()+',',(err)=>{
+    fs.appendFileSync('list.txt',','+word.toString(),(err)=>{
         if(err){
             console.log("FAILED TO WRITE/n"+err);
         }
@@ -174,17 +174,18 @@ function readWords(flag){                            //I wanted as few read/writ
 }
 function makeWord(array){
     let genWord = checkUsed(array);
-            console.log('RNG SAYS '+genWord);
-            let letterCount = 0;
-            let level = new word(genWord);
-            level.populateList(letterCount);
-            level.display();
-            level.gameLoop(letterCount);
+    //console.log('RNG SAYS '+genWord);
+    let letterCount = 0;
+    let level = new word(genWord);
+    level.populateList(letterCount);
+    level.display();
+    level.gameLoop(letterCount);
 
 }
 function checkUsed(arr){
     let rand = arr[Math.floor(Math.random()*arr.length)];
-    if(usedArr.indexOf(rand) === -1){
+    if((usedArr.indexOf(rand) === -1)&&(rand !== null)){
+        console.log('rng says'+rand);
         usedArr.push(rand);
         return rand;
     }
