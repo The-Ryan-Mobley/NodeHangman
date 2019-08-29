@@ -178,7 +178,7 @@ function makeWord(array){
     let letterCount = 0;
     let level = new word(genWord);
     level.populateList(letterCount);
-    level.display();
+    //level.display();
     level.gameLoop(letterCount);
 
 }

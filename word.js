@@ -37,10 +37,11 @@ module.exports = class word_obj{
                 this.wordarr.forEach((element)=>{
                     if(element.character === letter){
                         element.guess(letter);
+                        count++;
                     }
 
                 });
-                count++;
+                
                 if(count < this.fullWord.length){
                     this.gameLoop(count);
                 }
