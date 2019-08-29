@@ -1,26 +1,13 @@
-const fs = require('fs');
-const inquirer = require('inquirer');
-
-
-
 module.exports = class word_obj{
     constructor(w){
         this.fullWord = w;
         this.wordarr = [];
-        this.hiddenWord = [];
         this.usedLetters = [];
         this.tries = 8;
         this.completed = false;
-        this.Underscores();
-        
     }
     testvalues(){
         console.log('obj generated with word: '+this.fullWord);
-    }
-    Underscores(){ //needs to display letters from wordarr
-        for(let i = 0; i < this.fullWord.length; i++){
-            this.hiddenWord.push('_');
-        }
     }
     display(){
         console.log('tries left: '+this.tries);
@@ -39,9 +26,7 @@ module.exports = class word_obj{
                         element.guess(letter);
                         count++;
                     }
-
                 });
-                
                 if(count < this.fullWord.length){
                     this.gameLoop(count);
                 }
@@ -49,9 +34,7 @@ module.exports = class word_obj{
                     this.completed = true;
                     this.gameLoop(count);
                     this.display();
-
                 }
-
             }
             else{
                 this.tries--;

@@ -1,5 +1,3 @@
-//import word_obj from 'word.js';
-
 const fs = require('fs');
 const inquirer = require('inquirer');
 const word = require('./word.js');
@@ -7,8 +5,7 @@ const letter = require('./letter.js');
 var usedArr = [];
 
 word.prototype.populateList = function(counter){ //works by creating a new letter object and pushes it into an array
-    if(counter < this.fullWord.length){
-        
+    if(counter < this.fullWord.length){      
         let char = new letter(this.fullWord[counter]);
         this.wordarr.push(char);
         counter++;
@@ -18,24 +15,25 @@ word.prototype.populateList = function(counter){ //works by creating a new lette
         console.log('list finished ');
         this.wordarr.forEach((element)=>{
             console.log('letter: '+ element.character);
-
-        })
+        });
     }
-
+}
+word.prototype.gameChoice = function(count){
+    inquirer.prompt([
+        {
+            name:'choice',
+            type:'input',
+            message:'Enter a letter'
+        }
+    ]).then((ch)=>{
+        this.checkInput(ch.choice.toString(),count);
+    });
 }
 word.prototype.gameLoop = function(count){
     this.display();
     if(this.tries > 0){
         if(this.completed === false){
-            inquirer.prompt([
-                {
-                    name:'choice',
-                    type:'input',
-                    message:'Enter a letter'
-                }
-            ]).then((ch)=>{
-                this.checkInput(ch.choice.toString(),count);
-            })
+            this.gameChoice(count);  
         }
         else{
             inquirer.prompt([
@@ -46,14 +44,12 @@ word.prototype.gameLoop = function(count){
                 }
             ]).then((ch)=>{
                 if(ch.end===true){
-                    readWords('play');
-                    
+                    readWords('play'); 
                 }
                 else{
                     startMenu();
                 }
             });
-
         }
     }
     else{
@@ -65,8 +61,7 @@ word.prototype.gameLoop = function(count){
             }
         ]).then((ch)=>{
             if(ch.end===true){
-                readWords('play');
-                
+                readWords('play'); 
             }
             else{
                 startMenu();
@@ -99,19 +94,16 @@ function promptOptions(){
             name:'option',
             type:'list',
             choices: ['Add word','Remove word','back']
-
         }
     ]).then((op)=>{
         switch(op.option){
             case 'Add word':{
                 addPrompt();
                 break;
-
             }
             case 'Remove word':{
                 readWords('option');
                 break;
-
             }
             case 'back':{
                 startMenu();
@@ -126,7 +118,6 @@ function addPrompt(){
             name:'addition',
             type:'input',
             message:'Type the word you want to add: '
-
         }
     ]).then((op)=>{
         addWords(op.addition);
@@ -137,11 +128,9 @@ function addWords(word){
         if(err){
             console.log("FAILED TO WRITE/n"+err);
         }
-
     });
     console.log('succesfully added word '+word);
     promptOptions();
-
 }
 function removePrompt(wordList){
     inquirer.prompt([
@@ -149,12 +138,10 @@ function removePrompt(wordList){
             name:'subtraction',
             type:'input',
             message:'Type the word you want to remove: '
-
         }
     ]).then((op)=>{
         writeWords(wordList,op.subtraction);
     });
-
 }
 
 function readWords(flag){                            //I wanted as few read/write functions as possible so  
@@ -168,37 +155,30 @@ function readWords(flag){                            //I wanted as few read/writ
         }
         else{
             removePrompt(readArr);
-
         }
     });
 }
-function makeWord(array){
-    let genWord = checkUsed(array);
-    //console.log('RNG SAYS '+genWord);
+function makeWord(arrayOfWords){
+    let genWord = checkUsed(arrayOfWords);
     let letterCount = 0;
     let level = new word(genWord);
     level.populateList(letterCount);
-    //level.display();
     level.gameLoop(letterCount);
-
 }
 function checkUsed(arr){
     let rand = arr[Math.floor(Math.random()*arr.length)];
-    if((usedArr.indexOf(rand) === -1)&&(rand !== null)){
-        console.log('rng says'+rand);
-        usedArr.push(rand);
-        return rand;
-    }
-    else{
-        if(usedArr.length === arr.length){
+    if((usedArr.indexOf(rand) === -1)&&(rand !== null)){ //second condition to fix bug that sometimes
+        usedArr.push(rand);                              //happens with the remove word
+                                                         //this function picks a random word and makes sure
+        return rand;                                     //sure that words don't repeat until the full list 
+    }                                                    //of words is used by keeping track of used words 
+    else{                                                //in a global array and empties when all words are 
+        if(usedArr.length === arr.length){               //used
             usedArr = [];
         }
         checkUsed(arr);
     }
-
 }
-
-
 function startMenu(){
     inquirer.prompt([
         {
@@ -223,8 +203,7 @@ function startMenu(){
         }
     });
 }
-
-function main(){
+function main(){//code starts here
     startMenu();
 }
 main();
