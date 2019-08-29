@@ -46,7 +46,11 @@ word.prototype.gameLoop = function(count){
                 }
             ]).then((ch)=>{
                 if(ch.end===true){
-                    readWords();
+                    readWords('play');
+                    
+                }
+                else{
+                    startMenu();
                 }
             });
 
@@ -61,18 +65,32 @@ word.prototype.gameLoop = function(count){
             }
         ]).then((ch)=>{
             if(ch.end===true){
+                readWords('play');
+                
+            }
+            else{
                 startMenu();
             }
         });
         
     }
 }
-function writeWords(){ //writes the initial file
-    let arr = ["punch out","skyrim","team fortress","mario","doom"];
+function writeWords(arr,word){
+    let indexer = arr.indexOf(word);
+    if(indexer !== -1){
+        arr.splice(indexer,1);
+    }
+    else{
+        console.log('ERR word not found');
+    }
+    
+    
     fs.writeFile('list.txt',arr,(err)=>{
         if(err){
             console.log("FAILED TO WRITE/n"+err);
         }
+        console.log(`${word} removed`);
+        promptOptions();
     });
 }
 function promptOptions(){
@@ -91,6 +109,7 @@ function promptOptions(){
 
             }
             case 'Remove word':{
+                readWords('option');
                 break;
 
             }
@@ -124,20 +143,39 @@ function addWords(word){
     promptOptions();
 
 }
-function readWords(){
+function removePrompt(wordList){
+    inquirer.prompt([
+        {
+            name:'subtraction',
+            type:'input',
+            message:'Type the word you want to remove: '
+
+        }
+    ]).then((op)=>{
+        writeWords(wordList,op.subtraction);
+    });
+
+}
+
+function readWords(flag){
     fs.readFile('list.txt','utf-8',(err,data)=>{
         if(err){
             console.log('what have you done?/n'+err);
         }
         let readArr = data.split(',');
-        let genWord = checkUsed(readArr);
-        
-        console.log('RNG SAYS '+genWord);
-        let letterCount = 0;
-        let level = new word(genWord);
-        level.populateList(letterCount);
-        level.display();
-        level.gameLoop(letterCount);
+        if(flag === 'play'){
+            let genWord = checkUsed(readArr);
+            console.log('RNG SAYS '+genWord);
+            let letterCount = 0;
+            let level = new word(genWord);
+            level.populateList(letterCount);
+            level.display();
+            level.gameLoop(letterCount);
+        }
+        else{
+            removePrompt(readArr);
+
+        }
     });
 }
 function checkUsed(arr){
@@ -166,7 +204,7 @@ function startMenu(){
     ]).then((re)=>{
         switch(re.menu){
             case 'Start':{
-                readWords();
+                readWords('play');
                 break;
             }
             case 'Options':{

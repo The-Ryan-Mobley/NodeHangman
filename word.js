@@ -47,7 +47,7 @@ module.exports = class word_obj{
                 else{
                     this.completed = true;
                     this.gameLoop(count);
-                    this.display();
+                    //this.display();
 
                 }
 
