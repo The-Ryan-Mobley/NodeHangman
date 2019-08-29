@@ -4,8 +4,8 @@ const inquirer = require('inquirer');
 
 
 module.exports = class word_obj{
-    constructor(n){
-        this.fullWord = n;
+    constructor(w){
+        this.fullWord = w;
         this.wordarr = [];
         this.hiddenWord = [];
         this.usedLetters = [];

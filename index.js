@@ -157,26 +157,30 @@ function removePrompt(wordList){
 
 }
 
-function readWords(flag){
-    fs.readFile('list.txt','utf-8',(err,data)=>{
-        if(err){
-            console.log('what have you done?/n'+err);
-        }
-        let readArr = data.split(',');
-        if(flag === 'play'){
-            let genWord = checkUsed(readArr);
-            console.log('RNG SAYS '+genWord);
-            let letterCount = 0;
-            let level = new word(genWord);
-            level.populateList(letterCount);
-            level.display();
-            level.gameLoop(letterCount);
+function readWords(flag){                            //I wanted as few read/write functions as possible so  
+    fs.readFile('list.txt','utf-8',(err,data)=>{     //this function reads list.txt then acts based on where 
+        if(err){                                     //the function is called if it is from the start menu then
+            console.log('what have you done?/n'+err);//I use the string 'play' to designate that it needs to 
+        }                                            //create an obj then execute the main game loop if the
+        let readArr = data.split(',');               //function is called from the remove word option then I
+        if(flag === 'play'){                         //use 'option' which then reads the file then removes a selected word
+            makeWord(readArr);
         }
         else{
             removePrompt(readArr);
 
         }
     });
+}
+function makeWord(array){
+    let genWord = checkUsed(array);
+            console.log('RNG SAYS '+genWord);
+            let letterCount = 0;
+            let level = new word(genWord);
+            level.populateList(letterCount);
+            level.display();
+            level.gameLoop(letterCount);
+
 }
 function checkUsed(arr){
     let rand = arr[Math.floor(Math.random()*arr.length)];
