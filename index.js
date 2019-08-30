@@ -169,7 +169,8 @@ function readWords(flag){                            //I wanted as few read/writ
 function makeWord(arrayOfWords){
     let genWord = checkUsed(arrayOfWords);
     let letterCount = 0;
-    let level = new word(genWord);
+    console.log('generating' + genWord);
+    let level = new word(genWord.toString().toLowerCase());
     level.populateList(letterCount);
     level.gameLoop(letterCount);
 }
@@ -179,19 +180,23 @@ function checkUsed(arr){
     if((usedArr.indexOf(rand) === -1)&&(rand !== null)){ //second condition to fix bug that sometimes
         usedArr.push(rand);                              //happens with the remove word
                                                          //this function picks a random word and makes sure
-         console.log('rand two '+ rand);
-         return rand;                                     //sure that words don't repeat until the full list 
-        
+        console.log('rand two '+ rand);
+        return rand;                                     //sure that words don't repeat until the full list 
     }                                                    //of words is used by keeping track of used words 
     else{                                                //in a global array and empties when all words are 
         if(usedArr.length === arr.length){   
-            console.log('here');                         //used
+                         //used
             usedArr = [];
         }
-        checkUsed(arr);
+        rand = checkUsed(arr);
+        return rand;
+
+
+        
     }
 }
 function startMenu(){
+    usedArr = [];
     inquirer.prompt([
         {
             name:'menu',
