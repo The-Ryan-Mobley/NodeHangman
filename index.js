@@ -11,12 +11,6 @@ word.prototype.populateList = function(counter){ //works by creating a new lette
         counter++;
         this.populateList(counter);
     }
-    else{
-        console.log('list finished ');
-        this.wordarr.forEach((element)=>{
-            console.log('letter: '+ element.character);
-        });
-    }
 }
 word.prototype.gameChoice = function(count){
     inquirer.prompt([
@@ -169,23 +163,19 @@ function readWords(flag){                            //I wanted as few read/writ
 function makeWord(arrayOfWords){
     let genWord = checkUsed(arrayOfWords);
     let letterCount = 0;
-    console.log('generating' + genWord);
     let level = new word(genWord.toString().toLowerCase());
     level.populateList(letterCount);
     level.gameLoop(letterCount);
 }
 function checkUsed(arr){
     let rand = arr[Math.floor(Math.random()*arr.length)];
-    console.log('rand'+ rand);
     if((usedArr.indexOf(rand) === -1)&&(rand !== null)){ //second condition to fix bug that sometimes
         usedArr.push(rand);                              //happens with the remove word
                                                          //this function picks a random word and makes sure
-        console.log('rand two '+ rand);
         return rand;                                     //sure that words don't repeat until the full list 
     }                                                    //of words is used by keeping track of used words 
     else{                                                //in a global array and empties when all words are 
-        if(usedArr.length === arr.length){   
-                         //used
+        if(usedArr.length === arr.length){               //used         
             usedArr = [];
         }
         rand = checkUsed(arr);
