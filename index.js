@@ -29,6 +29,40 @@ word.prototype.gameChoice = function(count){
         this.checkInput(ch.choice.toString(),count);
     });
 }
+word.prototype.winPrompt = function(){
+    inquirer.prompt([
+        {
+            name:'end',
+            type:'confirm',
+            message:'Word Complete! Play again?'
+        }
+    ]).then((ch)=>{
+        if(ch.end===true){
+            readWords('play'); 
+        }
+        else{
+            startMenu();
+        }
+    });
+
+}
+word.prototype.gameOver = function(){
+    inquirer.prompt([
+        {
+            name:'end',
+            type:'confirm',
+            message:'GAME OVER! Play again?'
+        }
+    ]).then((ch)=>{
+        if(ch.end===true){
+            readWords('play'); 
+        }
+        else{
+            startMenu();
+        }
+    });
+
+}
 word.prototype.gameLoop = function(count){
     this.display();
     if(this.tries > 0){
@@ -36,38 +70,12 @@ word.prototype.gameLoop = function(count){
             this.gameChoice(count);  
         }
         else{
-            inquirer.prompt([
-                {
-                    name:'end',
-                    type:'confirm',
-                    message:'Word Complete! Play again?'
-                }
-            ]).then((ch)=>{
-                if(ch.end===true){
-                    readWords('play'); 
-                }
-                else{
-                    startMenu();
-                }
-            });
+            this.winPrompt()
         }
     }
     else{
-        inquirer.prompt([
-            {
-                name:'end',
-                type:'confirm',
-                message:'GAME OVER! Play again?'
-            }
-        ]).then((ch)=>{
-            if(ch.end===true){
-                readWords('play'); 
-            }
-            else{
-                startMenu();
-            }
-        });
-        
+        this.gameOver();
+          
     }
 }
 function writeWords(arr,word){
@@ -167,13 +175,17 @@ function makeWord(arrayOfWords){
 }
 function checkUsed(arr){
     let rand = arr[Math.floor(Math.random()*arr.length)];
+    console.log('rand'+ rand);
     if((usedArr.indexOf(rand) === -1)&&(rand !== null)){ //second condition to fix bug that sometimes
         usedArr.push(rand);                              //happens with the remove word
                                                          //this function picks a random word and makes sure
-        return rand;                                     //sure that words don't repeat until the full list 
+         console.log('rand two '+ rand);
+         return rand;                                     //sure that words don't repeat until the full list 
+        
     }                                                    //of words is used by keeping track of used words 
     else{                                                //in a global array and empties when all words are 
-        if(usedArr.length === arr.length){               //used
+        if(usedArr.length === arr.length){   
+            console.log('here');                         //used
             usedArr = [];
         }
         checkUsed(arr);
