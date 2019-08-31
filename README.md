@@ -11,11 +11,11 @@ to the main menu. There is also an options menu where users can add or remove wo
   1) letter- contains logic for the 'letter' constructor that holds a single letter of the word, and switches between a hidden display
   and a revealed display
   
-  2)word- contains the logic for the 'word' constructor which handles most of the games functionality. this object will hold an array
+  2) word- contains the logic for the 'word' constructor which handles most of the games functionality. this object will hold an array
   of letters that change display as players input correct guesses, until the word is completed then a new object will be constructed.
   word also has the gameloop function which cycles between the main logic of the game.
   
-  3)index- is the core file of the program which combines all the elements from the various modules in order to run the game the user
+  3) index- is the core file of the program which combines all the elements from the various modules in order to run the game the user
   must run the index file in node.
   
 ## SCREENSHOTS:
