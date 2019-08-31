@@ -20,7 +20,7 @@ to the main menu. There is also an options menu where users can add or remove wo
   
 ## SCREENSHOTS:
   ![start](https://drive.google.com/uc?export=view&id=130tXoWErPxDaiZTNb7gjGkeVxjPziH50)
-  ![gameplay](https://drive.google.com/file/d/16mwA3DvSwOLLuhHdMtErhXYloUSzxRmX/view?usp=sharing)
+  ![gameplay](https://drive.google.com/uc?export=view&id=16mwA3DvSwOLLuhHdMtErhXYloUSzxRmX)
   ![complete](https://drive.google.com/file/d/1JyvcjGl3B-BCStMkBno5Pie1spD86oU1/view?usp=sharing)
   ![options](https://drive.google.com/file/d/1rciuXThaUztfpYSoLHImM6mULLZIpycP/view?usp=sharing)
   ![removeword](https://drive.google.com/file/d/17tOmSoQoYeAQG7Ct1Y43SQGUbOHHdjMh/view?usp=sharing)
