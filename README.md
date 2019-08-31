@@ -19,7 +19,7 @@ to the main menu. There is also an options menu where users can add or remove wo
   must run the index file in node.
   
 ## SCREENSHOTS:
-  ![start](https://drive.google.com/file/d/130tXoWErPxDaiZTNb7gjGkeVxjPziH50/view?usp=sharing)
+  ![start](https://drive.google.com/uc?export=view&id=130tXoWErPxDaiZTNb7gjGkeVxjPziH50)
   ![gameplay](https://drive.google.com/file/d/16mwA3DvSwOLLuhHdMtErhXYloUSzxRmX/view?usp=sharing)
   ![complete](https://drive.google.com/file/d/1JyvcjGl3B-BCStMkBno5Pie1spD86oU1/view?usp=sharing)
   ![options](https://drive.google.com/file/d/1rciuXThaUztfpYSoLHImM6mULLZIpycP/view?usp=sharing)
