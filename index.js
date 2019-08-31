@@ -2,7 +2,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const word = require('./word.js');
 const letter = require('./letter.js');
-var usedArr = [];
+let usedArr = [];
 
 word.prototype.populateList = function(counter){ //works by creating a new letter object and pushes it into an array
     if(counter < this.fullWord.length){      
